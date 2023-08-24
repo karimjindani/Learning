@@ -1,26 +1,38 @@
 public class MultiplyIntegers {
+
     public static void main(String[] args) {
+        System.out.println(process(args));
+    }
+
+    public static String process(String[] args) {
         // Check if no arguments are provided
         if (args.length == 0) {
-            System.out.println("Please provide at least one integer as an argument.");
-            return;
+            return "Please provide at least one integer as an argument.";
         }
 
         // Initialize result with the first number
-        int result = Integer.parseInt(args[0]);
+        int result;
+        try {
+            result = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            return "Invalid input: " + args[0] + " is not an integer.";
+        }
 
-        // If there's only one number, print it
+        // If there's only one number, return it
         if (args.length == 1) {
-            System.out.println(result);
-            return;
+            return String.valueOf(result);
         }
 
         // Multiply the numbers
         for (int i = 1; i < args.length; i++) {
-            result *= Integer.parseInt(args[i]);
+            try {
+                result *= Integer.parseInt(args[i]);
+            } catch (NumberFormatException e) {
+                return "Invalid input: " + args[i] + " is not an integer.";
+            }
         }
 
-        // Print the result
-        System.out.println(result);
+        // Return the result
+        return String.valueOf(result);
     }
 }
